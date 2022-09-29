@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Start : MonoBehaviour
+public class PlayerSpawn : MonoBehaviour
 {
       [SerializeField] private GameObject player;
       [SerializeField] private Transform playerSpawnPosition;
