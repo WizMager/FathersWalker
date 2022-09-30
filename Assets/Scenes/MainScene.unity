@@ -2308,8 +2308,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1495092385}
-  waypoint: 0
+  pointTransform: {fileID: 370563083}
   deadEnd: 1
+  stopCheckpoint: 1
 --- !u!4 &370563083
 Transform:
   m_ObjectHideFlags: 0
@@ -2318,7 +2319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370563081}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 66.282, y: 73.828, z: 7.29}
+  m_LocalPosition: {x: 66.282, y: 73.686, z: 7.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 710819154}
@@ -2745,7 +2746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &421571454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8200,7 +8201,7 @@ GameObject:
   - component: {fileID: 1387159362}
   - component: {fileID: 1387159363}
   m_Layer: 0
-  m_Name: Waypoint1
+  m_Name: Checkpoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8214,7 +8215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387159361}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 62.289, y: 73.828, z: -0.4}
+  m_LocalPosition: {x: 62.289, y: 73.686, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 710819154}
@@ -8237,8 +8238,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1495092385}
-  waypoint: 0
+  pointTransform: {fileID: 1387159362}
   deadEnd: 1
+  stopCheckpoint: 1
 --- !u!1 &1396136251
 GameObject:
   m_ObjectHideFlags: 0
@@ -9003,8 +9005,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1495092385}
-  waypoint: 0
+  pointTransform: {fileID: 1471951456}
   deadEnd: 0
+  stopCheckpoint: 0
 --- !u!114 &1471951455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9018,6 +9021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCheckpoint: {fileID: 1471951454}
+  rotationDuration: 1
+  moveSpeed: 5
 --- !u!4 &1471951456
 Transform:
   m_ObjectHideFlags: 0
@@ -9219,7 +9224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495092383}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 62.289, y: 73.828, z: 7.29}
+  m_LocalPosition: {x: 62.289, y: 73.686, z: 7.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 710819154}
@@ -9242,8 +9247,9 @@ MonoBehaviour:
   - {fileID: 1855932833}
   - {fileID: 1387159363}
   - {fileID: 370563082}
-  waypoint: 0
+  pointTransform: {fileID: 1495092384}
   deadEnd: 0
+  stopCheckpoint: 1
 --- !u!1 &1501292988
 GameObject:
   m_ObjectHideFlags: 0
@@ -11571,7 +11577,7 @@ GameObject:
   - component: {fileID: 1855932832}
   - component: {fileID: 1855932833}
   m_Layer: 0
-  m_Name: Waypoint2
+  m_Name: Checkpoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11585,7 +11591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855932831}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 62.289, y: 73.828, z: 31.38}
+  m_LocalPosition: {x: 62.289, y: 73.686, z: 31.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 710819154}
@@ -11608,8 +11614,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1495092385}
-  waypoint: 0
+  pointTransform: {fileID: 1855932832}
   deadEnd: 1
+  stopCheckpoint: 1
 --- !u!1 &1859103453
 GameObject:
   m_ObjectHideFlags: 0
