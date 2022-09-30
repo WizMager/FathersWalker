@@ -17,7 +17,6 @@ public class PlayerControls : MonoBehaviour
     private Image _rightArrow;
     private Image _forwardArrow;
     private Checkpoint _currentCheckpoint;
-    private Checkpoint _previousCheckpoint;
     private Checkpoint[] _nextCheckpoints;
     private int _chosenDirectionIndex;
 
@@ -89,8 +88,8 @@ public class PlayerControls : MonoBehaviour
             if (_nextCheckpoints[_chosenDirectionIndex].DeadEndCheck)
             {
                 var rotation =
-                    Quaternion.LookRotation(_previousCheckpoint.transform.position - _player.position, _player.up);
-                _player.DORotateQuaternion( rotation, rotationDuration).OnComplete(CheckpointActivation);
+                    Quaternion.LookRotation(_currentCheckpoint.GetCheckpointTransform.position - _player.position, _player.up);
+                _player.DORotateQuaternion(rotation, rotationDuration).OnComplete(CheckpointActivation);
             }
             else
             {
@@ -101,7 +100,6 @@ public class PlayerControls : MonoBehaviour
     
     private void CheckpointActivation()
     {
-        _previousCheckpoint = _currentCheckpoint;
         _currentCheckpoint = _nextCheckpoints[_chosenDirectionIndex];
         _nextCheckpoints = _currentCheckpoint.GetNextCheckpoints;
         ButtonActivation();
