@@ -19,7 +19,7 @@ public class PlayerControls : MonoBehaviour
     private Checkpoint _currentCheckpoint;
     private Checkpoint[] _nextCheckpoints;
     private Checkpoint _previousCheckpoint;
-    private int _chosenDirectionIndex;
+    private Checkpoint _chosenNextPoint;
 
     [Inject]
     private void Construct(PlayerComponents playerComponents, CanvasComponents canvasComponents)
@@ -48,7 +48,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (_nextCheckpoints[0] == null) return;
         DisableButtons();
-        _chosenDirectionIndex = 0;
+        _chosenNextPoint = _nextCheckpoints[0];
         NewCheckpointDirection();
     }
     
@@ -56,7 +56,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (_nextCheckpoints[1] == null) return; 
         DisableButtons();
-        _chosenDirectionIndex = 1;
+        _chosenNextPoint = _nextCheckpoints[1];
         NewCheckpointDirection();
     }
     
@@ -64,29 +64,28 @@ public class PlayerControls : MonoBehaviour
     {
         if (_nextCheckpoints[2] == null) return; 
         DisableButtons();
-        _chosenDirectionIndex = 2;
+        _chosenNextPoint = _nextCheckpoints[2];
         NewCheckpointDirection();
     }
 
     private void NewCheckpointDirection()
     {
         var rotation =
-            Quaternion.LookRotation(_nextCheckpoints[_chosenDirectionIndex].GetCheckpointTransform.position - _player.position,
+            Quaternion.LookRotation(_chosenNextPoint.GetCheckpointTransform.position - _player.position,
                 _player.up);
         _player.DORotateQuaternion(rotation, rotationDuration).OnComplete(MoveTween);
     }
     
     private void MoveTween()
     {
-        _player.DOMove(_nextCheckpoints[_chosenDirectionIndex].GetCheckpointTransform.position, moveSpeed).SetSpeedBased().OnComplete(OnMoveComplete);
+        _player.DOMove(_chosenNextPoint.GetCheckpointTransform.position, moveSpeed).SetSpeedBased().OnComplete(OnMoveComplete);
     }
 
     private void OnMoveComplete()
     {
-        var nextCheckpoint = _nextCheckpoints[_chosenDirectionIndex];
-        if (nextCheckpoint.StopCheckpoint)
+        if (_chosenNextPoint.StopCheckpoint)
         {
-            if (_nextCheckpoints[_chosenDirectionIndex].DeadEndCheck)
+            if (_chosenNextPoint.DeadEndCheck)
             {
                 var rotation =
                     Quaternion.LookRotation(_currentCheckpoint.GetCheckpointTransform.position - _player.position, _player.up);
@@ -94,13 +93,18 @@ public class PlayerControls : MonoBehaviour
             }
             else
             {
-                _player.DORotateQuaternion(nextCheckpoint.transform.localRotation, 2f).OnComplete(CheckpointActivation);
+                _player.DORotateQuaternion(_chosenNextPoint.transform.localRotation, 2f).OnComplete(CheckpointActivation);
             }
         }
         else
         {
             CheckpointActivation();
-            _chosenDirectionIndex = _previousCheckpoint == _nextCheckpoints[0] ? 1 : 0;
+            foreach (var checkpoint in _nextCheckpoints)
+            {
+                if (_previousCheckpoint == checkpoint) continue;
+                _chosenNextPoint = checkpoint;
+                break;
+            }
             NewCheckpointDirection();
         }
     }
@@ -108,7 +112,7 @@ public class PlayerControls : MonoBehaviour
     private void CheckpointActivation()
     {
         _previousCheckpoint = _currentCheckpoint;
-        _currentCheckpoint = _nextCheckpoints[_chosenDirectionIndex];
+        _currentCheckpoint = _chosenNextPoint;
         _nextCheckpoints = _currentCheckpoint.GetNextCheckpoints;
         ButtonActivation();
     }
